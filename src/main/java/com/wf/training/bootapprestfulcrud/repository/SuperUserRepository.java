@@ -9,6 +9,10 @@ import com.wf.training.bootapprestfulcrud.entity.SuperUser;
 public interface SuperUserRepository extends JpaRepository<SuperUser, Integer>{
 
 	SuperUser findById(int id);
+
+	SuperUser findBySuperUserId(Integer superUserId);
+	
+	SuperUser findByName(String name);
 	
 	
 }

@@ -1,16 +1,31 @@
 package com.wf.training.bootapprestfulcrud.dto;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class BackofficeInputDto {
-
+	
+	@NotBlank(message="First Name is Mandatory")
 	private String firstName;
-	
+	@NotBlank(message="Last Name is Mandatory")
 	private String lastName;
+	@Email
+	@NotBlank(message="Email is Mandatory")
+	private String emailId;
 	
-	private String emailID;
-	
+	@NotBlank(message="Password is Mandatory")
 	private String password;
+	
+	private Integer loginId;
+
+	public Integer getLoginId() {
+		return loginId;
+	}
+
+	public void setLoginId(Integer loginId) {
+		this.loginId = loginId;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -28,12 +43,12 @@ public class BackofficeInputDto {
 		this.lastName = lastName;
 	}
 
-	public String getEmailID() {
-		return emailID;
+	public String getEmailId() {
+		return emailId;
 	}
 
-	public void setEmailID(String emailID) {
-		this.emailID = emailID;
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
 
 	public String getPassword() {

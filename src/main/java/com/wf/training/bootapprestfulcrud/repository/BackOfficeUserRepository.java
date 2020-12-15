@@ -9,7 +9,5 @@ import com.wf.training.bootapprestfulcrud.entity.SuperUser;
 @Repository
 public interface BackOfficeUserRepository extends JpaRepository<BackOfficeUser, Integer>{
 
-	SuperUser findById(int id);
-	
-	
+	BackOfficeUser findByLoginId(int id);
 }

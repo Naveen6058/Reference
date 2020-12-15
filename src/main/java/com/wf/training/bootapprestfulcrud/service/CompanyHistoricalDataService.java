@@ -11,5 +11,6 @@ public interface CompanyHistoricalDataService {
 //	public CompanyHistoricalDataOutputDto addCompany(SearchCompanyInputDto employeeInputDto);
 //	public CompanyHistoricalDataOutputDto editCompany(Long id, SearchCompanyInputDto employeeInputDto);
 //	public CompanyHistoricalDataOutputDto deleteCompany(Long id);	
+	List<CompanyHistoricalDataOutputDto> fetchSingleByCompanyId(Long companyCode);
 
 }

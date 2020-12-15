@@ -1,108 +1,143 @@
 package com.wf.training.bootapprestfulcrud.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.wf.training.bootapprestfulcrud.entity.SuperUser;
+import com.wf.training.bootapprestfulcrud.dto.BackOfficeLoginDto;
+import com.wf.training.bootapprestfulcrud.dto.SuperUserLoginDto;
+import com.wf.training.bootapprestfulcrud.dto.InvestorDto;
+import com.wf.training.bootapprestfulcrud.dto.LoginDto;
+import com.wf.training.bootapprestfulcrud.service.BackOfficeUserService;
+import com.wf.training.bootapprestfulcrud.service.InvestorService;
 import com.wf.training.bootapprestfulcrud.service.SuperUserService;
-import com.wf.training.bootapprestfulcrud.service.SuperUserServiceImpl;
 
 @Controller
-@RequestMapping("/user")
+@SessionAttributes("Investor")
 public class HomeController {
 	
 	@Autowired
-	private SuperUserServiceImpl superUserService;
+	private SuperUserService superService;
 	
-
-	// default mapping for parent url
-	@RequestMapping()
-	public String defaultResponse() {
-		// return "user-base";
-		return "redirect:/user/home";
+	@Autowired
+	private BackOfficeUserService boService;
+	
+	@Autowired
+	private InvestorService investorService;
+	
+	@RequestMapping(value ={"/logout","/index",""})
+	public String logout() {
+		return "index";
 	}
 	
-	@RequestMapping("/home")
-	public String home() {
-		// add business logic
-		
-		// respond back with a view page name
-		return "UserHomePage";
+	@RequestMapping("/InvestorLogin")
+	public String userLogin(@ModelAttribute("investorLoginDto") LoginDto investorLoginDto) {
+		return "invLogin";
 	}
 	
-	@RequestMapping("/Userlogin")
-	public String userLogin() {
-		// add business logic
-		
-		// respond back with a view page name
-		return "login";
-	}
-	
-	@RequestMapping("/BOUserLogin")
-	public String backOfficeUserLogin() {
-		// add business logic
-		
-		// respond back with a view page name
-		return "BackOfficeUserLogin";
-	}
 	
 	@RequestMapping("/SuperUserLogin")
 	public String superUserLogin(Model model) {
-		// add business logic
-		SuperUser superuser = new SuperUser();
+		SuperUserLoginDto superuser = new SuperUserLoginDto();
 		model.addAttribute("superuser", superuser);
-		// respond back with a view page name
 		return "SuperUserLogin";
 	}
 	
+	@RequestMapping("/BOUserLogin")
+	public String backOfficeUserLogin(Model model) {
+		BackOfficeLoginDto backofficeuser=new BackOfficeLoginDto();
+		model.addAttribute("backofficeuser", backofficeuser);
+		return "BackOfficeUserLogin";
+	}
 	
 	@PostMapping("/validate")
-	public String loginValidate(@Valid @ModelAttribute("superuser") SuperUser superuser,BindingResult result) {
-		if(result.hasErrors())
+	public String loginValidate(@Valid @ModelAttribute("superuser") SuperUserLoginDto dto,BindingResult result,Model model) {
+		System.out.println("Logging in");
+		if(result.hasErrors()) {
 			return "SuperUserLogin";
-		else if(superuser.getSuperUserId().equals(1) && superuser.getPassword().equals("abc")) {
-				return "SuperUserHomePage";
-			}else
+		} 
+		//else if(superuser.getSuperUserId().equals(1) && superuser.getPassword().equals("abc")) {
+		else if(superService.validateUser(dto)) {
+			System.out.println("superuser");
+			return "SuperUserHomePage";
+		}else
+			model.addAttribute("Message", "Invalid Credentials");
 			return "SuperUserLogin";
 	}
 	
-	@RequestMapping("/UserRegistration")
-	public String userRegistration() {
-		// add business logic
+	@PostMapping("/bovalidate")
+	public String boLoginValidate(@Valid @ModelAttribute("backofficeuser") BackOfficeLoginDto user,BindingResult result,Model model) {
+		if(result.hasErrors()) {
+			return "BackOfficeUserLogin";
+		}
+		else if(boService.validateUser(user)) {
+				return "BackOfficeUserHomePage";
+			}else {
+				model.addAttribute("Message", "Invalid Credentials");
+			return "BackOfficeUserLogin";
+			}
+	}
+	
+	@RequestMapping("/InvestorRegistration")
+	public String userRegistration(@ModelAttribute("newInvestor") InvestorDto newInvestor) {
+		return "invRegistration";
+	}
+	
+	@RequestMapping("/createInvestor")
+	public String createInvestor(@Valid @ModelAttribute("newInvestor") InvestorDto newInvestor, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return "invRegistration";
+		}
+		InvestorDto newInvestorOut = this.investorService.addInvestor(newInvestor);
 		
-		// respond back with a view page name
-		return "userRegistration";
+		if(newInvestorOut==null) {
+			model.addAttribute("Message", "Investor already registered");
+			return "invRegistration";
+		}
+		
+		model.addAttribute("newInvestorOut", newInvestorOut);
+		
+		return "SavedInvestor";
+	}
+	
+	@RequestMapping("/invValidate")
+	public String invValidate(@Valid @ModelAttribute("investorLoginDto") LoginDto investorLoginDto, BindingResult result, Model model,
+			HttpServletRequest request, HttpSession session) {
+		if (result.hasErrors()) {
+			return "invLogin";
+		}
+		
+		session.invalidate();
+	    HttpSession newSession = request.getSession();
+		
+		boolean status = this.investorService.validateInvestor(investorLoginDto);
+		newSession.setAttribute("Investor", investorLoginDto);
+		if (status==true) {
+			return "invHomePage";
+		}else {
+			model.addAttribute("Message", "Invalid Credentials");
+			return "invLogin";
+		}
 	}
 	
 	@RequestMapping("/access-denied")
 	public String accessDenied() {
-		// add business logic
-		
-		// respond back with a view page name
 		return "error-page";
 	}
 	
 	@RequestMapping("/custom-login")
 	public String customLogin() {
-		// add business logic
-		
-		// respond back with a view page name
 		return "custom-login";
 	}
 	
-	@RequestMapping("/logout")
-	public String logout() {
-		// add business logic
-		
-		// respond back with a view page name
-		return "index";
-	}
-		
 }

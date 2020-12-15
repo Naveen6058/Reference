@@ -13,6 +13,7 @@ public class HistoricalRecordCompany {
 	private Long companyCode;
 	private float stockPrice; 
 	private String dateTime;
+	private String currency;
 	
 	public Long getCompanyHistoricalDataId() {
 		return companyHistoricalDataId;
@@ -38,6 +39,12 @@ public class HistoricalRecordCompany {
 	}
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
+	}
+	public String getCurrency() {
+		return currency;
+	}
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 	
 }

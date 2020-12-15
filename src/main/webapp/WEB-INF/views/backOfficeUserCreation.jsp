@@ -34,6 +34,9 @@
 			<span>
 				<span class="text-light font-weight-bold" >Create Back Office User</span>
 			</span>
+			<div><spring:form action="${pageContext.request.contextPath}/logout" method="POST">
+				<input type="submit" value="Logout" />
+				</spring:form></div>
 		</nav>
 	</div>
 	<div id=center>

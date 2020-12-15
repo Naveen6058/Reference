@@ -6,13 +6,8 @@ public class CompanyHistoricalDataOutputDto {
 	private String companyName;
 	private float stockPrice; 
 	private String dateTime;
+	private String currency;
 	
-	public String getCompanyId() {
-		return companyName;
-	}
-	public void setCompanyId(String companyId) {
-		this.companyName = companyId;
-	}
 	public Long getCompanyCode() {
 		return companyCode;
 	}
@@ -30,6 +25,18 @@ public class CompanyHistoricalDataOutputDto {
 	}
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+	public String getCurrency() {
+		return currency;
+	}
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 	
 

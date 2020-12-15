@@ -2,8 +2,13 @@ package com.wf.training.bootapprestfulcrud.entity;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class HistoricalRecordCommodity {
 
+	@Id
 	private int commodityId;
 	private String CommodityPrice; 
 	private LocalDateTime dateTime;
@@ -13,6 +18,9 @@ public class HistoricalRecordCommodity {
 		this.commodityId = commodityId;
 		CommodityPrice = commodityPrice;
 		this.dateTime = dateTime;
+	}
+	public HistoricalRecordCommodity() {
+		// TODO Auto-generated constructor stub
 	}
 	public int getCommodityId() {
 		return commodityId;

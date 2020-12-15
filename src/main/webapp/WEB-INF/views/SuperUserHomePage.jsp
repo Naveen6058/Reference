@@ -113,16 +113,7 @@ body {
 	<div id="mySidebar" class="sidebar">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
 		<ol>
-			<li><a href="#">Create/Modify Company</a></li>
-			<li><a href="#">Create/Modify Commodity</a></li>
-			<li>
-				<label class="generateCommision">Generate Commission</label>
-				<ul>
-					<li><a href="#">Annual Report</a></li>
-					<li><a href="#">Monthly Report</a></li>
-					<li><a href="#">Periodic Report</a></li>
-				</ul>
-			</li>
+			<li><a href="${pageContext.request.contextPath}/bocreate">Create BackOffice user</a></li>
 		</ol>
 	</div>
 	<div id="main">

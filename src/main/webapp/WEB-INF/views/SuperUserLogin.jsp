@@ -27,19 +27,27 @@
 	.error{
 		color:red;
 	}
+	#error{
+		color:red;
+	}
+	#primaryNavigators{
+		margin-left:50px;
+		color:white;
+		position:relative;
+	}
 </style>
 <title>Super User Login Page</title>
 </head>
 <body>
 	<div>
 		<nav class="navbar navbar-dark bg-primary">
-			<span>
-				<span class="text-light font-weight-bold" >Super User Login Page</span>
-			</span>
+			<div><a href="${pageContext.request.contextPath}/index" id="primaryNavigators">Index</a></div>
+			<span class="text-light font-weight-bold" >Super User Login Page</span>
 		</nav>
 	</div>
 	<br/>
 	<div id=login>
+	<h4 id =error>${Message}</h4>
 	<spring:form action="${pageContext.request.contextPath}/validate" method="POST" modelAttribute="superuser"> 
 		<div>
 			<div><label >Username</label></div>

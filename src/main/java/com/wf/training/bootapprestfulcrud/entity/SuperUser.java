@@ -16,16 +16,15 @@ import javax.persistence.Id;
 @Entity
 @Table(name = "superuser")
 public class SuperUser {
-	@Column(name="Name")
-	private String name;
+	
 	@Id
 	@Column(name="SuperUserID")
-	@NotNull(message = "User ID is mandatory!")
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Integer superUserId;
+	
+	@Column(name="Name",unique = true)
+	private String name;
 	@Column(name="Password")
-	@NotBlank(message = "password is mandatory!")
-
 	private String password;
 	public SuperUser(String name, Integer superUserId, String password) {
 		super();

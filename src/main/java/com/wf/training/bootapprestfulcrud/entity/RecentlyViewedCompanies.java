@@ -1,37 +1,41 @@
 package com.wf.training.bootapprestfulcrud.entity;
 
-import java.time.LocalDateTime;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+@Entity
 public class RecentlyViewedCompanies {
-
-	private int investorId;
-	private int companyCode;
-	private LocalDateTime dateTime;
+	@Id  // primary key
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // AI
+	private long recentViewId;
+	private String loginKey;
+	private String companyTitle;
+	private String dateTime;
 	
-	public RecentlyViewedCompanies(int investorId, int companyCode, LocalDateTime dateTime) {
-		super();
-		this.investorId = investorId;
-		this.companyCode = companyCode;
-		this.dateTime = dateTime;
+	public long getRecentViewId() {
+		return recentViewId;
 	}
-	public int getInvestorId() {
-		return investorId;
+	public void setRecentViewId(long recentViewId) {
+		this.recentViewId = recentViewId;
 	}
-	public void setInvestorId(int investorId) {
-		this.investorId = investorId;
+	public String getLoginKey() {
+		return loginKey;
 	}
-	public int getCompanyCode() {
-		return companyCode;
+	public void setLoginKey(String loginKey) {
+		this.loginKey = loginKey;
 	}
-	public void setCompanyCode(int companyCode) {
-		this.companyCode = companyCode;
+	public String getCompanyTitle() {
+		return companyTitle;
 	}
-	public LocalDateTime getDateTime() {
+	public void setCompanyTitle(String companyTitle) {
+		this.companyTitle = companyTitle;
+	}
+	public String getDateTime() {
 		return dateTime;
 	}
-	public void setDateTime(LocalDateTime dateTime) {
+	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
-	
 	
 }

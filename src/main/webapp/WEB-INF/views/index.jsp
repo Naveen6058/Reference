@@ -12,7 +12,7 @@
 	}
 	#login{
 		margin: auto;
-		width: 22%;
+		width: 17%;
 		margin-top: 5%;
 		border: 3px solid green;
 		padding: 10px;
@@ -39,12 +39,12 @@
 		<table>
 			<tr>
 				<td>New user? </td> 
-				<td id = leftline><a href="${pageContext.request.contextPath}/UserRegistration">Signup</a></td>
+				<td id = leftline><a href="${pageContext.request.contextPath}/InvestorRegistration">Sign-Up</a></td>
 			</tr>
 			<tr><td><hr></td><td><hr></td></tr>
 			<tr>
 				<td>User Login </td> 
-				<td id = leftline><a href="${pageContext.request.contextPath}/Userlogin">Login</a></td>
+				<td id = leftline><a href="${pageContext.request.contextPath}/InvestorLogin">Login</a></td>
 			</tr>
 			<tr><td><hr></td><td><hr></td></tr>
 			<tr>

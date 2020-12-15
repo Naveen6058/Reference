@@ -16,18 +16,17 @@ import javax.validation.constraints.NotBlank;
 public class BackOfficeUser {
 	
 	@Column(name="FirstName")
-	@NotBlank(message="First Name is Mandatory")
 	private String firstName;
+	
 	@Column(name="LastName")
-	@NotBlank(message="Last Name is Mandatory")
 	private String lastName;
+	
 	@Column(name="EmailID")
-	@Email
-	@NotBlank(message="Email is Mandatory")
 	private String emailId;
+	
 	@Column(name="Password")
-	@NotBlank(message="Password is Mandatory")
 	private String password;
+	
 	@Id
 	@Column(name="LoginId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 

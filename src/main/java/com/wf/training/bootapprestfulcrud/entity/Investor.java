@@ -1,43 +1,27 @@
 package com.wf.training.bootapprestfulcrud.entity;
 
-public class User {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
+public class Investor {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int investorId;
 	private String firstName;
 	private String lastName;
-	private int mobileNumber;
+	private long mobileNumber;
+	@Column(unique=true)
 	private String panId;
 	private String gender;
 	private String emailId;
 	private String password;
-	private int investorId;
+	@Column(unique=true)
 	private String loginKey;
-	
-	public User(String firstName, String lastName, int mobileNumber, String panId, String gender, String emailId,String loginKey,
-			String password, int investorId) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.mobileNumber = mobileNumber;
-		this.panId = panId;
-		this.gender = gender;
-		this.emailId = emailId;
-		this.loginKey=loginKey;
-		this.password = password;
-		this.investorId = investorId;
-	}
-	
-	public User(String firstName, String lastName, int mobileNumber, String panId, String gender, String emailId,String loginKey,
-			String password) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.mobileNumber = mobileNumber;
-		this.panId = panId;
-		this.gender = gender;
-		this.emailId = emailId;
-		this.loginKey=loginKey;
-		this.password = password;
-	}
 	
 	public String getLoginKey() {
 		return loginKey;
@@ -59,10 +43,10 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public int getMobileNumber() {
+	public long getMobileNumber() {
 		return mobileNumber;
 	}
-	public void setMobileNumber(int mobileNumber) {
+	public void setMobileNumber(long mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 	public String getPanId() {

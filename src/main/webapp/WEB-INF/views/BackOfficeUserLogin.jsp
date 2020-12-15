@@ -24,28 +24,41 @@
 	table{
 		text-align: center;
 	}
+	.error{
+		color:red;
+	}
+	#error{
+		color:red;
+	}
+	#primaryNavigators{
+		margin-left:50px;
+		color:white;
+		position:relative;
+	}
 </style>
 <title>Back Office User Login Page</title>
 </head>
 <body>
 	<div>
 		<nav class="navbar navbar-dark bg-primary">
-			<span>
-				<span class="text-light font-weight-bold" >Back Office User Login Page</span>
-			</span>
+			<div><a href="${pageContext.request.contextPath}/index" id="primaryNavigators">Index</a></div>
+			<span class="text-light font-weight-bold" >Back Office User Login Page</span>
 		</nav>
 	</div>
 	<br/>
 	<div id=login>
-	<spring:form action="${pageContext.request.contextPath}/validate" method="POST"> 
+	<h4 id =error>${Message}</h4>
+	<spring:form action="${pageContext.request.contextPath}/bovalidate" method="POST" modelAttribute="backofficeuser"> 
 		<div>
-			<div><label>Username</label></div>
-			<div><input type="text" name="username"/></div>
+			<div><label >Login ID</label></div>
+			<div><spring:input path="loginId" type="text" />
+			<spring:errors path="loginId" cssClass="error"/></div>
 		</div>
 			<br/>
 		<div>
 			<div><label>Password</label></div>
-			<div><input type="password" name="password"/></div>
+			<div><spring:input path="password" type="password" />
+			<spring:errors path="password" cssClass="error"/></div>
 		</div>
 			<br/>
 		<div>
