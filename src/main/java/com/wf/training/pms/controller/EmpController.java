@@ -15,7 +15,7 @@ import java.util.List;
 import javax.validation.Valid;
 import com.wf.training.pms.dto.EmployeeInputDto;
 import com.wf.training.pms.dto.EmployeeOutputDto;
-import com.wf.training.pms.exception.EmployeeException;
+import com.wf.training.pms.exception.EmpException;
 import com.wf.training.pms.service.EmployeeService;
 
 @RestController
@@ -34,7 +34,7 @@ public class EmpController {
 	@PostMapping("/employees")
 	public EmployeeOutputDto save(@Valid @RequestBody EmployeeInputDto employeeInputDto, BindingResult result) {
 		if (result.hasErrors()) {
-			throw new EmployeeException("Invalid data format!");
+			throw new EmpException("Invalid data format!");
 		}
 		EmployeeOutputDto employeeOutputDto = this.empService.addEmployee(employeeInputDto);
 		return employeeOutputDto;

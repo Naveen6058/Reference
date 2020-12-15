@@ -16,20 +16,40 @@ import com.wf.training.pms.service.CompanyHistoricalDataService;
 @Service
 public class CompanyHistoricalDataServiceImp implements CompanyHistoricalDataService {
 
-	// inject repository as dependency
 	@Autowired
-	private CompanyHistoricalDataRepository companyHPRepository;
+	private CompanyHistoricalDataRepository CompanyHistoricalDataRepository;
+
 	@Autowired
-	private CompanyRepository companyRepository;
-	
-	// utility method
-	private List<CompanyHistoricalDataOutputDto> convertEntityToOutputDto(List<HistoricalRecordCompany> historicalRecordCompany,Company company) {
-		
+	private CompanyRepository CompanyRepository;
+
+	@Override
+	public List<CompanyHistoricalDataOutputDto> fetchAllCompanies() {
+		// To do
+		return null;
+	}
+
+	@Override
+	public List<CompanyHistoricalDataOutputDto> fetchSingleByCompanyId(Long companyCode) {
+		List<HistoricalRecordCompany> historicalPriceData = this.CompanyHistoricalDataRepository
+				.findAllByCompanyCode(companyCode).orElse(null);
+		Company company = this.CompanyRepository.findById(companyCode).orElse(null);
+
+		if (historicalPriceData == null) {
+			return null;
+		}
+		List<CompanyHistoricalDataOutputDto> historicalPrices = this.convertEntityToOutputDto(historicalPriceData,
+				company);
+		return historicalPrices;
+	}
+
+	private List<CompanyHistoricalDataOutputDto> convertEntityToOutputDto(
+			List<HistoricalRecordCompany> historicalRecordCompany, Company company) {
+
 		List<CompanyHistoricalDataOutputDto> companyHistoricalDataOutputDto = new ArrayList<CompanyHistoricalDataOutputDto>();
-		
-		for(HistoricalRecordCompany historicalPrice:historicalRecordCompany) {
+
+		for (HistoricalRecordCompany historicalPrice : historicalRecordCompany) {
 			CompanyHistoricalDataOutputDto listPrice = new CompanyHistoricalDataOutputDto();
-			
+
 			listPrice.setCompanyCode(company.getCompanyCode());
 			listPrice.setCompanyName(company.getCompanyTitle());
 			listPrice.setCurrency(historicalPrice.getCurrency());
@@ -37,32 +57,8 @@ public class CompanyHistoricalDataServiceImp implements CompanyHistoricalDataSer
 			listPrice.setStockPrice(historicalPrice.getStockPrice());
 			companyHistoricalDataOutputDto.add(listPrice);
 		}
-		
-		return companyHistoricalDataOutputDto;
-	}
-	
-	@Override
-	public List<CompanyHistoricalDataOutputDto> fetchAllCompanies() {
-//		// use repository to fetch data from DB
-//		List<HistoricalRecordCompany> historicalRecordCompany = this.companyHPRepository.findAll();
-//		List<CompanyHistoricalDataOutputDto> companyHistoricalDataOutputDto = 
-//				this.convertEntityToOutputDto(historicalPriceData, company);
-//		return companyHistoricalDataOutputDto;
-		return null;
-	}
 
-	@Override
-	public List<CompanyHistoricalDataOutputDto> fetchSingleByCompanyId(Long companyCode) {
-		List<HistoricalRecordCompany> historicalPriceData = this.companyHPRepository.findAllByCompanyCode(companyCode).orElse(null);
-		Company company = this.companyRepository.findById(companyCode).orElse(null);
-		
-		if(historicalPriceData==null) {
-			return null;
-		}
-		
-		List<CompanyHistoricalDataOutputDto> historicalPrices = this.convertEntityToOutputDto(historicalPriceData, company);
-		
-		return historicalPrices;
+		return companyHistoricalDataOutputDto;
 	}
 
 }

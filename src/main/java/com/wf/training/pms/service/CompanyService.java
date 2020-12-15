@@ -2,8 +2,6 @@ package com.wf.training.pms.service;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import com.wf.training.pms.dto.StockPriceDto;
 import com.wf.training.pms.dto.CompanyDto;
 import com.wf.training.pms.dto.SearchCompanyDto;

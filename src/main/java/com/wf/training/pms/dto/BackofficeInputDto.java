@@ -11,7 +11,7 @@ public class BackofficeInputDto {
 	@NotBlank(message="Last Name is Mandatory")
 	private String lastName;
 	@Email
-	@NotBlank(message="Email is Mandatory")
+	@NotBlank(message="Email ID is Mandatory")
 	private String emailId;
 	
 	@NotBlank(message="Password is Mandatory")

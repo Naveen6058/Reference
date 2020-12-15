@@ -1,8 +1,5 @@
 package com.wf.training.pms.dto;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-
 public class BackofficeOutputDto {
 	
 	private String firstName;

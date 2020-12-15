@@ -7,8 +7,8 @@ import javax.persistence.Id;
 @Entity
 public class HistoricalRecordCompany {
 
-	@Id  // primary key
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // AI
+	@Id  
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long companyHistoricalDataId;
 	private Long companyCode;
 	private float stockPrice; 

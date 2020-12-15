@@ -1,18 +1,19 @@
 package com.wf.training.pms.dto;
 
-import java.time.LocalDateTime;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class CommodityDto {
-
-	@NotBlank(message="Commodity Name is required")
-	private String commodityName;
+	
 	@NotBlank(message="Currency is required")
 	private String currency;
+	
 	@NotNull(message="Price is required")
 	private Float price;
+	
+	@NotBlank(message="Commodity Name is required")
+	private String commodityName;
+	
 	
 	private String dateTime;
 	private int commodityId;

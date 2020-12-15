@@ -17,11 +17,11 @@ public class BackOfficeUser {
 	@Column(name="LastName")
 	private String lastName;
 	
-	@Column(name="EmailID")
-	private String emailId;
-	
 	@Column(name="Password")
 	private String password;
+	
+	@Column(name="EmailID")
+	private String emailId;
 	
 	@Id
 	@Column(name="LoginId")

@@ -8,7 +8,7 @@ public class BackOfficeLoginDto {
 	@NotBlank(message="Password is Mandatory")
 	private String password;
 	
-	@NotNull(message="Login id is Mandatory")
+	@NotNull(message="User ID is Mandatory")
 	private Integer loginId;
 
 	public String getPassword() {

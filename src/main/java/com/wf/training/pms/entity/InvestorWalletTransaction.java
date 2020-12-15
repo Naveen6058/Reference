@@ -1,14 +1,17 @@
 package com.wf.training.pms.entity;
 
-import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Entity;
+
 @Entity
 public class InvestorWalletTransaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long invWalletTransactionId;
+	
 	private long walletId;
 	private String transactionType;
 	private double amount;

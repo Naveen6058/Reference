@@ -20,7 +20,6 @@ public class HistoricalRecordCommodity {
 		this.dateTime = dateTime;
 	}
 	public HistoricalRecordCommodity() {
-		// TODO Auto-generated constructor stub
 	}
 	public int getCommodityId() {
 		return commodityId;

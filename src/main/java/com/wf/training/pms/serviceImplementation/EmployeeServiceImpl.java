@@ -12,15 +12,59 @@ import com.wf.training.pms.entity.Employee;
 import com.wf.training.pms.repository.EmployeeRepository;
 import com.wf.training.pms.service.EmployeeService;
 
-// @Component
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-	// inject repository as dependency
-	@Autowired
-	private EmployeeRepository repository;
 	
-	// utility method
+	@Autowired
+	private EmployeeRepository EmployeeRepository;
+	
+	@Override
+	public List<EmployeeOutputDto> fetchAllEmployees() {
+
+		List<Employee> employees = this.EmployeeRepository.findAll();
+		List<EmployeeOutputDto> employeeDtos = 
+					employees.stream()
+							 .map(this :: convertEntityToOutputDto)
+							 .collect(Collectors.toList());
+		return employeeDtos;
+	}
+
+	@Override
+	public EmployeeOutputDto fetchSingleEmployee(Long id) {
+		
+		Employee employee = this.EmployeeRepository.findById(id).orElse(null);
+		EmployeeOutputDto employeeOutputDto =  this.convertEntityToOutputDto(employee);
+		return employeeOutputDto;
+	}
+
+	@Override
+	public EmployeeOutputDto addEmployee(EmployeeInputDto employeeInputDto) {
+	
+		Employee employee = this.covertInputDtoToEntity(employeeInputDto);
+		Employee newEmployee = this.EmployeeRepository.save(employee);
+		EmployeeOutputDto employeeOutputDto = this.convertEntityToOutputDto(newEmployee);
+		return employeeOutputDto;
+	}
+
+	@Override
+	public EmployeeOutputDto editEmployee(Long id, EmployeeInputDto employeeInputDto) {
+		
+		Employee employee = this.covertInputDtoToEntity(employeeInputDto);
+		employee.setId(id);
+		Employee updatedEmployee = this.EmployeeRepository.save(employee);
+		EmployeeOutputDto employeeOutputDto = this.convertEntityToOutputDto(updatedEmployee);
+		return employeeOutputDto;
+	}
+
+	@Override
+	public EmployeeOutputDto deleteEmployee(Long id) {
+	
+		EmployeeOutputDto employeeOutputDto = this.fetchSingleEmployee(id);
+		this.EmployeeRepository.deleteById(id);
+		return employeeOutputDto;
+	}
+	
 	private EmployeeOutputDto convertEntityToOutputDto(Employee employee) {
 		EmployeeOutputDto employeeOutputDto = new EmployeeOutputDto();
 		employeeOutputDto.setId(employee.getId());
@@ -52,68 +96,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setDa(da);
 		employee.setPfDeduction(pfDeduction);
 		return employee;
-	}
-	
-	
-	@Override
-	public List<EmployeeOutputDto> fetchAllEmployees() {
-		
-		// use repository to fetch data from DB
-		List<Employee> employees = this.repository.findAll();
-		// convert entity into dto
-		/*List<EmployeeOutputDto> employeeDtos = new ArrayList<EmployeeOutputDto>();
-		for(Employee employee : employees) {
-			EmployeeOutputDto employeeOutputDto = this.convertEntityToOutputDto(employee);
-			employeeDtos.add(employeeOutputDto);
-		}*/
-		List<EmployeeOutputDto> employeeDtos = 
-					employees.stream()
-							 .map(this :: convertEntityToOutputDto)
-							 .collect(Collectors.toList());
-		return employeeDtos;
-	}
-
-	@Override
-	public EmployeeOutputDto fetchSingleEmployee(Long id) {
-		// fetch record from DB
-		Employee employee = this.repository.findById(id).orElse(null);
-		// convert entity into output dto
-		EmployeeOutputDto employeeOutputDto =  this.convertEntityToOutputDto(employee);
-		return employeeOutputDto;
-	}
-
-	@Override
-	public EmployeeOutputDto addEmployee(EmployeeInputDto employeeInputDto) {
-		// convert dto into entity
-		Employee employee = this.covertInputDtoToEntity(employeeInputDto);
-		// save entity in DB : returns the copy of newly added record back
-		Employee newEmployee = this.repository.save(employee);
-		// convert entity into output dto
-		EmployeeOutputDto employeeOutputDto = this.convertEntityToOutputDto(newEmployee);
-		return employeeOutputDto;
-	}
-
-	@Override
-	public EmployeeOutputDto editEmployee(Long id, EmployeeInputDto employeeInputDto) {
-		// convert dto into entity
-		Employee employee = this.covertInputDtoToEntity(employeeInputDto);
-		// assign the id to update
-		employee.setId(id);
-		// repository method to update
-		// save : (upsert) : entity object : id(PK) empty/null/0 : insert else update
-		Employee updatedEmployee = this.repository.save(employee);
-		// convert entity into output dto
-		EmployeeOutputDto employeeOutputDto = this.convertEntityToOutputDto(updatedEmployee);
-		return employeeOutputDto;
-	}
-
-	@Override
-	public EmployeeOutputDto deleteEmployee(Long id) {
-		// get a copy of record
-		EmployeeOutputDto employeeOutputDto = this.fetchSingleEmployee(id);
-		// call repository method for deletion
-		this.repository.deleteById(id);
-		return employeeOutputDto;
 	}
 
 }

@@ -1,7 +1,8 @@
 package com.wf.training.pms.dto;
 
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.DecimalMin;
+
 import java.time.LocalDateTime;
 
 public class StockPriceDto {
@@ -9,11 +10,11 @@ public class StockPriceDto {
 	@DecimalMin("0.1")
 	@NotNull(message="Share price should not be empty")
 	private Float sharePrice;
+	
 	private String companyName;
+	
 	private LocalDateTime dateTime;
 	
-	
-
 	public LocalDateTime getDateTime() {
 		return dateTime;
 	}

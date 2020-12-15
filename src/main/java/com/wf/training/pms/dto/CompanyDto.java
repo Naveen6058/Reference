@@ -7,24 +7,34 @@ import javax.validation.constraints.NotBlank;
 public class CompanyDto {
 
 	private Long companyCode;
+	
 	@NotBlank
 	private String companyTitle;
+	
 	@NotBlank
 	private String operation;
+	
 	@Min(value = 1000)
-	private int shareCount; 
+	private int shareCount;
+	
 	@DecimalMin("0.1") 
 	private float sharePrice;
+	
 	@NotBlank
 	private String sector;
+	
 	@NotBlank
 	private String currency;
+	
 	@Min(value = 1000)
 	private long turnover;
+	
 	@NotBlank
 	private String dateTimeIPO;
+	
 	@NotBlank
 	private String stockExchange;
+	
 	@DecimalMin("0.1") 
 	private float ipoPrice;
 	

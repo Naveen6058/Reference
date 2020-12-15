@@ -8,18 +8,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 @Entity
 public class Company {
-	@Id  // primary key
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // AI
+	@Id  
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long companyCode;
+	
 	@Column(name = "company_title", unique = true)
 	private String companyTitle;
+	
 	private String operation;
 	private int shareCount; 
 	private float sharePrice;
 	private String sector;
 	private String currency; 
 	private long turnover;
-//	private int boUserId;
 	private String dateTimeIPO;
 	private String stockExchange;
 	private float ipoPrice;
@@ -55,12 +56,7 @@ public class Company {
 	public void setSharePrice(float sharePrice) {
 		this.sharePrice = sharePrice;
 	}
-//	public int getBoUserId() {
-//		return boUserId;
-//	}
-//	public void setBoUserId(int boUserId) {
-//		this.boUserId = boUserId;
-//	}
+
 	public String getOperation() {
 		return operation;
 	}

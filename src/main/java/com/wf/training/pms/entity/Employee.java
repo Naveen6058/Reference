@@ -8,17 +8,12 @@ import javax.persistence.Id;
 @Entity 
 public class Employee {
 
-	@Id  // primary key
+	@Id  
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
-	
-	
 	private String name;
-	
 	private String email;
-	
 	private String contact;
-	
 	private Double basicSalary;
 	private Double hra;
 	private Double ta;

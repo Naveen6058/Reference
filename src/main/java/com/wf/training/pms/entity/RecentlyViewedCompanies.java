@@ -4,10 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+
 @Entity
 public class RecentlyViewedCompanies {
-	@Id  // primary key
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // AI
+	@Id  
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private long recentViewId;
 	private String loginKey;
 	private String companyTitle;

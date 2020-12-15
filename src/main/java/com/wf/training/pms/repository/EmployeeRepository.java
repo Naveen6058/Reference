@@ -6,8 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.wf.training.pms.entity.Employee;
 
-// @Component
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long>{
-    // nothing to add
+ 
 }

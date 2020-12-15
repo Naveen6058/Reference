@@ -31,7 +31,7 @@ public class Commodity {
 	}
 	
 	public Commodity() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public String getCommodityName() {
